@@ -3,7 +3,7 @@ const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const fs = require("fs");
-const host = __dirname;
+const host = "https://demo-json-server123.herokuapp.com/";
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
