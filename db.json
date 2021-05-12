@@ -1,0 +1,100 @@
+{
+  "image": [
+    {
+      "image": "D:\\Huy22A\\demo-json-server/image/1620819410631.jpg",
+      "createdAt": 1620819410631,
+      "id": 1
+    }
+  ],
+  "ads": {
+    "datetime": "2021-05-12T20:17",
+    "image": "E:\\data\\TotoroMilkTeaAPI/image_ads/1620664873800.jpg",
+    "textStandstill": "Khuyến mãi cực sốc! Tặng cốc Totoro cho 5 khách hàng có hóa đơn cao nhất",
+    "textRun": "Khuyến mãi tưng bừng nhân dịp 30/4 và 1/5! Giảm giá cực sốc! Giảm tới 40% cho mỗi cốc trà sữa thơm ngon!",
+    "discount": "40",
+    "status": true,
+    "updateAt": 1620664873800
+  },
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Tất cả"
+    },
+    {
+      "id": 2,
+      "categoryName": "Bán chạy"
+    },
+    {
+      "id": 3,
+      "categoryName": "Trà sữa"
+    },
+    {
+      "id": 4,
+      "categoryName": "Nước ép"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Trà sữa trân châu",
+      "price": 45000,
+      "categoryId": [
+        1,
+        2,
+        3
+      ],
+      "image": "anh",
+      "amountSold": 2000
+    },
+    {
+      "id": 2,
+      "name": "Nước ép táo",
+      "price": 45000,
+      "categoryId": [
+        1,
+        2,
+        4
+      ],
+      "image": "anh",
+      "amountSold": 3000
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "huynguyen22",
+      "password": "12345678",
+      "role": "user",
+      "name": "Nguyễn Ngọc Huy",
+      "email": "huy.nguyen22@student.passerellesnumeriques.org",
+      "address": "101B - Lê Hữu Trác - Đà Nẵng",
+      "phonenumber": "0355621838",
+      "status": true
+    },
+    {
+      "id": 2,
+      "username": "teomap",
+      "password": "12345678",
+      "role": "user",
+      "name": "Phạm Anh Tuấn",
+      "email": "tuan.pham22@student.passerellesnumeriques.org",
+      "address": "101B - Lê Hữu Trác - Đà Nẵng",
+      "phonenumber": "098878787",
+      "status": true
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "codeBill": "1620242120655",
+      "userId": 1,
+      "productId": 1
+    },
+    {
+      "id": 2,
+      "codeBill": "1620242218279",
+      "userId": 1,
+      "productId": 2
+    }
+  ]
+}
