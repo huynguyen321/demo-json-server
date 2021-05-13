@@ -4,7 +4,7 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const host = __dirname;
+const host = __filename;
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
@@ -14,7 +14,7 @@ server.get("/api", (req, res) => {
 });
 
 // 'http://totoromilkteaapi.herokuapp.com/';
-
+server.get('/app/')
 // put ads
 server.use((req, res, next) => {
   if (req.method === "POST" && req.path === "/api/image") {
