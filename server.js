@@ -25,6 +25,7 @@ server.use((req, res, next) => {
       res.end('"/></body></html>');
     });
   }
+  next()
 });
 // put ads
 server.use((req, res, next) => {
