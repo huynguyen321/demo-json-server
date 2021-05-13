@@ -1,53 +1,29 @@
-const jsonServer = require("json-server");
-const server = jsonServer.create();
-const router = jsonServer.router("db.json");
-const middlewares = jsonServer.defaults();
-const fs = require("fs");
+
 const host = "https://demo-json-server123.herokuapp.com/";
+const express = require("express");
+const server = express();
+const fileupload = require("express-fileupload");
+server.use(fileupload());
 
-// Set default middlewares (logger, static, cors and no-cache)
-server.use(middlewares);
+server.get('/',(req,res,next)=>{
+  res.status(200).send("OK")
+})
 
-server.use(jsonServer.bodyParser);
-
-server.use((req, res, next) => {
-  if (req.method === "POST" && req.path === "/api/image") {
-    const date = new Date();
-    req.body.createdAt = date.getTime();
-
-    const data = req.body;
-
-    const image = data["image"];
-
-    const fileType = image.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0].split("/")[1];
-    var endFile = "";
-    if (fileType == "jpeg") {
-      endFile = "jpg";
-    } else if (fileType == "png") {
-      endFile = "png";
-    }
-
-    const filename = date.getTime() + "." + endFile;
-    // create new image ads
-    fs.writeFile(
-      `image/${filename}`,
-      image.split(",")[1],
-      "base64",
-      function (err) {
-        console.log(err);
-      }
-    );
-    data.image = `${host}/image/${filename}`;
-    req.body = data;
-  }
-  // Continue to JSON Server router
-  next();
+server.post("/upload", function (req, res, next) {
+  const file = req.files.photo;
+  const filename = (new Date()).getTime()
+  file.mv(`./uploads/ ${filename}.${(file.name).split('.')[1]}`, function (err, result) {
+    if (err) throw err;
+    res.send({
+      success: true,
+      message: "File uploaded!",
+      url : `${__dirname}/uploads/ ${filename}.${(file.name).split('.')[1]}`
+    });
+  });
 });
 
-// Use default router
-
 const PORT = process.env.PORT || 3000;
-server.use("/api", router);
+
 server.listen(PORT, () => {
   console.log("Demo JSON Server is running");
 });
