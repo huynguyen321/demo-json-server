@@ -17,7 +17,7 @@ server.get("/api", (req, res) => {
 
 // put ads
 server.use((req, res, next) => {
-  if (req.method === "POST" && req.path === "/api/upload") {
+  if (req.method === "POST" && req.path === "/api/image") {
     const date = new Date();
     let updateAt = date.getTime();
 
@@ -51,10 +51,7 @@ server.use((req, res, next) => {
       data.image = `${host}/image_ads/${filename}`;
       req.body = data;
     }
-
-    res.json(req.body);
   }
-
   // Continue to JSON Server router
   next();
 });
