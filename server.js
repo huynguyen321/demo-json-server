@@ -4,7 +4,7 @@ const jsonServer = require("json-server");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-const host = __filename;
+const host = __dirname;
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
@@ -14,7 +14,18 @@ server.get("/api", (req, res) => {
 });
 
 // 'http://totoromilkteaapi.herokuapp.com/';
-server.get('/app/')
+server.use((req, res, next) => {
+  if (req.path.indexOf("/app/image_ads")) {
+    fs.readFile("image.jpg", function (err, data) {
+      if (err) throw err; // Fail if the file can't be read.
+     // res.writeHead(200, { "Content-Type": "image/jpeg" });
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write('<html><body><img src="data:image/jpeg;base64,');
+      res.write(Buffer.from(data).toString("base64"));
+      res.end('"/></body></html>');
+    });
+  }
+});
 // put ads
 server.use((req, res, next) => {
   if (req.method === "POST" && req.path === "/api/image") {
