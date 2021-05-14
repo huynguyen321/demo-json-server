@@ -18,7 +18,7 @@ server.get("/api/get_image_ads/*", (req, res) => {
   const files = fs.readdirSync(`./image_ads`);
   const filename = req.path.split("/")[3];
   if (files.findIndex((file) => file == filename) >= 0) {
-    fs.readFile("./image_ads/1620907308770.jpg", function (err, data) {
+    fs.readFile(`./image_ads/${filename}`, function (err, data) {
       if (err) throw err; // Fail if the file can't be read.
       let stingBase64 = Buffer.from(data).toString("base64");
       res.json({
