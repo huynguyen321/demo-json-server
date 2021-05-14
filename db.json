@@ -8,6 +8,10 @@
     {
       "image": "D:\\Huy22A\\demo-json-server/image_ads/1620907308770.jpg",
       "id": 2
+    },
+    {
+      "image": "D:\\Huy22A\\demo-json-server/image_ads/1620957723457.jpg",
+      "id": 3
     }
   ],
   "ads": {

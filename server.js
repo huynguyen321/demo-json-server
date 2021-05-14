@@ -1,3 +1,4 @@
+const e = require("express");
 const fs = require("fs");
 const jsonServer = require("json-server");
 
@@ -13,19 +14,18 @@ server.get("/api", (req, res) => {
   res.send("Welcome to API of Totoro Milk Tea shop");
 });
 
-// 'http://totoromilkteaapi.herokuapp.com/';
-server.use((req, res, next) => {
-  if (req.path.indexOf("/app/image_ads")) {
-    fs.readFile("image.jpg", function (err, data) {
+server.get("/api/get_image_ads/*", (req, res) => {
+  const files = fs.readdirSync(`./image_ads`);
+  const filename = req.path.split("/")[3];
+  if (files.findIndex((file) => file == filename) >= 0) {
+    fs.readFile("./image_ads/1620907308770.jpg", function (err, data) {
       if (err) throw err; // Fail if the file can't be read.
-     // res.writeHead(200, { "Content-Type": "image/jpeg" });
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.write('<html><body><img src="data:image/jpeg;base64,');
-      res.write(Buffer.from(data).toString("base64"));
-      res.end('"/></body></html>');
+      let stingBase64 = Buffer.from(data).toString("base64");
+      res.json({
+        image: `data:image/jpeg;base64,${stingBase64}`,
+      });
     });
-  }
-  next()
+  } else res.json({ image: "Not Found" });
 });
 // put ads
 server.use((req, res, next) => {
@@ -74,5 +74,5 @@ const PORT = process.env.PORT || 3000;
 server.use("/api", router);
 // Start server
 server.listen(PORT, () => {
-  console.log("TotoroMilkTea website's JSON Server is running");
+  console.log("JSON Server is running");
 });
